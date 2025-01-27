@@ -1,16 +1,33 @@
 {% extends "base.html" %}
+
 {% block title %}
     {{ title }}
 {% endblock title %}
 
 
 
-{% block main %} 
-<main>
-  <!--  Modal -->
-  {% include "components/_modal.html" %}
+  {% block main %} 
+    <main>
+      <!--  Modal -->
+      {% include "components/_modal.html" %}
+      
+      <div class="container">
+        <!--  Баннер на главной странице -->
+        {% include "shop/components/_banner.html" %}
+          <!-- CATEGORIES SECTION-->
+          {% include "shop/components/_categories.html" %}
+      
+          <!-- TRENDING PRODUCTS-->
+          {% include "shop/components/_trending_products.html" %}
+   
+          <!-- SERVICES-->
+          {% include "shop/components/_services.html" %}
 
-  <!-- HERO SECTION-->
-  {% include "components/_hero.html" %}
-</main>
-{% endblock main %}
+          <!-- NEWSLETTER-->
+          {% include "shop/components/_newsletter.html" %}
+       
+        </div>
+ 
+  
+    </main>
+    {% endblock main %}

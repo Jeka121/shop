@@ -10,19 +10,26 @@ class Category(models.Model):
     parent = models.ForeignKey('self',on_delete=models.CASCADE, null=True, blank = True, verbose_name= 'Категория', related_name='subcategories')
 
     def get_absolute_url(self):
-        pass
-
+        """Ссылка на страницу категорий"""
+        return reverse('category_detail', kwargs={'slug': self.slug})
+    
     def __str__(self):
         return self.title
     
     def __repr__(self):
         return f'Категория: pk={self.pk}, title={self.title}'
     
+    def get_parent_category_photo(self):
+        """Для получения картинки родительской категории"""
+        if self.image:
+            return self.image.url
+
 
     class Meta:
         verbose_name='Категория'
         verbose_name_plural='Категории'
 
+    
 
 class Product(models.Model):
     title = models.CharField(max_length=255,verbose_name='Наименование товара')
@@ -39,8 +46,12 @@ class Product(models.Model):
 
 
     def get_absolute_url(self):
-        pass
+        return reverse('product_page', kwargs={'slug':self.slug})
 
+
+    def get_first_photo(self):
+        if self.images.first():
+            return self.images.first().image.url
 
     def __str__(self):
         return self.title
